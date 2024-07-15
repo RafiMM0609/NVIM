@@ -4,6 +4,7 @@ return {
     lazy = false,
     name = "catppuccin",
     priority = 1000,
+    flavour = "auto",
     config = function()
       vim.cmd.colorscheme "catppuccin-mocha"
     end
