@@ -19,29 +19,25 @@ return {
     config = function()
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
       local lspconfig = require("lspconfig")
-      lspconfig.tsserver.setup({
-        capabilities = capabilities
+      local mason_lspconfig = require("mason-lspconfig")
+
+      mason_lspconfig.setup({
+        ensure_installed = {
+          "tsserver",
+          -- "solargraph",
+          "html",
+          "lua_ls",
+          "pyright",
+          "pylsp",
+        },
       })
-      lspconfig.solargraph.setup({
-        capabilities = capabilities
-      })
-      lspconfig.html.setup({
-        capabilities = capabilities
-      })
-      lspconfig.lua_ls.setup({
-        capabilities = capabilities
-      })
-      lspconfig.pyright.setup({
-        capabilities = capabilities,
-        filetypes = {"python"},
-      })
-      lspconfig.pylsp.setup({
-        capabilities = capabilities,
-        filetypes = {"python"},
-      })
-      lspconfig.ruff_lsp.setup({
-        capabilities = capabilities,
-        filetypes = {"python"},
+
+      mason_lspconfig.setup_handlers({
+        function(server_name)
+          lspconfig[server_name].setup({
+            capabilities = capabilities
+          })
+        end
       })
 
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
