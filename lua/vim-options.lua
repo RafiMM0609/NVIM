@@ -16,6 +16,8 @@ vim.keymap.set('v', 'G', '"+y')
 vim.keymap.set('n', '<Space>j', '<Space>gd')
 vim.api.nvim_set_keymap('n', '<Space>j', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Space>y', 'yyP', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Down>', ':m .+1<CR>==', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Up>', ':m .-2<CR>==', { noremap = true, silent = true })
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
