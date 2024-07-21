@@ -21,7 +21,13 @@ return {
     },
     config = function()
       require("telescope").setup({
+        -- defaults = {
+        --   file_ignore_patterns = {},
+        --   hidden = true,
+        -- },
         extensions = {
+          file_ignore_patterns = {},
+          hidden = true,
           --  ['fzf'] = {
           --   fuzzy = true,                    -- false will only do exact matching
           --   override_generic_sorter = true,  -- override the generic sorter
