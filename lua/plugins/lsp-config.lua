@@ -19,16 +19,18 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 -- Automatically show floating diagnostics on cursor hold
-vim.api.nvim_create_autocmd("CursorHold", {
-  pattern = "*",
-  callback = function()
-    vim.diagnostic.open_float()
-  end,
-  desc = "Show diagnostics in floating window on cursor hold"
-})
+-- vim.api.nvim_create_autocmd("<Space>w", {
+--   pattern = "*",
+--   callback = function()
+--     vim.diagnostic.open_float()
+--   end,
+--   desc = "Show diagnostics in floating window on cursor hold"
+-- })
+vim.api.nvim_set_keymap('n', '<Space>w', ':lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true, desc = "Show diagnostics in floating window" })
+
 
 -- Optional: Adjust the cursor hold timeout if needed
-vim.o.updatetime = 200 -- Set the update time to 200 ms
+-- vim.o.updatetime = 200 -- Set the update time to 200 ms
 return {
   {
     "williamboman/mason.nvim",
