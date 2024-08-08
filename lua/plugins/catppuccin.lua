@@ -1,12 +1,12 @@
-return {
-  {
-    "catppuccin/nvim",
-    lazy = false,
-    name = "catppuccin",
-    priority = 1000,
-    flavour = "auto",
-    config = function()
-      vim.cmd.colorscheme "catppuccin-mocha"
-    end
-  }
-}
+-- return {
+--   {
+--     "catppuccin/nvim",
+--     lazy = false,
+--     name = "catppuccin",
+--     priority = 1000,
+--     flavour = "macchiato",
+--     config = function()
+--       vim.cmd.colorscheme "catppuccin-macchiato"
+--     end
+--   }
+-- }

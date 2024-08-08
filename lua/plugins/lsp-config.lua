@@ -1,3 +1,34 @@
+vim.diagnostic.config({
+  virtual_text = false, -- Change the prefix for virtual text diagnostics
+  signs = true, -- Show signs in the sign column
+  update_in_insert = true, -- Update diagnostics while in insert mode
+  underline = true, -- Underline diagnostics in the text
+  severity_sort = true, -- Sort diagnostics by severity
+  float = {
+    border = 'rounded', -- Border style for floating diagnostics
+    source = 'always', -- Show source of diagnostic
+    header = "", -- Header text for the floating window
+    prefix = "", -- Prefix text for the floating window
+  },
+})
+
+-- Customize signs for different diagnostic levels
+local signs = { Error = "✗", Warn = "!" , Hint = "⚑", Info = "ℹ" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+end
+-- Automatically show floating diagnostics on cursor hold
+vim.api.nvim_create_autocmd("CursorHold", {
+  pattern = "*",
+  callback = function()
+    vim.diagnostic.open_float()
+  end,
+  desc = "Show diagnostics in floating window on cursor hold"
+})
+
+-- Optional: Adjust the cursor hold timeout if needed
+vim.o.updatetime = 200 -- Set the update time to 200 ms
 return {
   {
     "williamboman/mason.nvim",

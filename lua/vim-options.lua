@@ -11,7 +11,6 @@ vim.opt.swapfile = false
 vim.keymap.set('n', '<c-k>', ':wincmd k<CR>')
 vim.keymap.set('n', '<c-j>', ':wincmd j<CR>')
 vim.keymap.set('n', '<c-h>', ':wincmd h<CR>')
-vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 
 -- Copy code
 vim.keymap.set('v', 'H', '"+y', { noremap = true, silent = true })
@@ -27,15 +26,24 @@ vim.api.nvim_set_keymap('n', '<Space>j', '<cmd>lua vim.lsp.buf.definition()<CR>'
 
 -- Shortcut Command
 vim.api.nvim_set_keymap('n', '<leader>m', ':Mason<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'G', ':LazyGitCurrentFile<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', 'G', ':LazyGitCurrentFile<CR>', { noremap = true, silent = true })
 -- vim.api.nvim_set_keymap('n', 'L', ':LazyGitCurrentFile<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '?', ':Gitsigns blame_line<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', 'p', '"+p', { noremap = true, silent = true })
-
-
+vim.api.nvim_set_keymap('n', 'p', '"+P', { noremap = true, silent = true })
+if vim.fn.maparg('p', 'v') ~= '' then
+  vim.api.nvim_del_keymap('v', 'p')
+end
+vim.api.nvim_set_keymap('v', 'p', '"+P', { noremap = true, silent = true })
+if vim.fn.maparg('d', 'n') ~= '' then
+  vim.api.nvim_del_keymap('n', 'd')
+end
+vim.api.nvim_set_keymap('n', 'd', '"+d', { noremap = true, silent = true })
+if vim.fn.maparg('d', 'v') ~= '' then
+  vim.api.nvim_del_keymap('v', 'd')
+end
+vim.api.nvim_set_keymap('v', 'd', '"+d', { noremap = true, silent = true })
 -- Save file
 vim.api.nvim_set_keymap('n', '<C-s>', ':wa<CR>', { noremap = true, silent = true })
-
 -- Move line
 vim.api.nvim_set_keymap('n', '<C-Up>', ':m .-2<CR>==', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-Down>', ':m .+1<CR>==', { noremap = true, silent = true })
